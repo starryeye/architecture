@@ -6,7 +6,7 @@
 
 ## dependency
 - Java 17
-- Spring Boot
+- Spring Boot 3.0.5
 - Spring Framework
 - Spring Web
 - Spring Data Jpa
