@@ -1,4 +1,8 @@
 package dev.practice.hexagonal.domain.port.in;
 
-public class UpdateOrderUseCase {
+import dev.practice.hexagonal.domain.model.Order;
+
+public interface UpdateOrderUseCase {
+
+    Order updateOrder(Order order);
 }

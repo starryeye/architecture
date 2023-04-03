@@ -1,4 +1,8 @@
 package dev.practice.hexagonal.domain.port.in;
 
-public class CreateOrderUseCase {
+import dev.practice.hexagonal.domain.model.Order;
+
+public interface CreateOrderUseCase {
+
+    Order createOrder(Order order);
 }
