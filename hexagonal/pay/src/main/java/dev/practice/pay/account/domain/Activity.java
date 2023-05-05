@@ -1,6 +1,5 @@
 package dev.practice.pay.account.domain;
 
-import lombok.Builder;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;

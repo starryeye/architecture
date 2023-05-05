@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "activity")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ActivityJpaEntity {
+class ActivityJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

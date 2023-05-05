@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "account")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AccountJpaEntity {
+class AccountJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

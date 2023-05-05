@@ -2,22 +2,18 @@ package dev.practice.pay.account.adapter.out.persistence;
 
 import dev.practice.pay.account.application.port.out.LoadAccountPort;
 import dev.practice.pay.account.domain.Account;
-import dev.practice.pay.account.domain.Activity;
-import dev.practice.pay.account.domain.ActivityWindow;
-import dev.practice.pay.account.domain.Money;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 /**
  * 양방향 매핑 전략
  */
 @RequiredArgsConstructor
-public class AccountPersistenceAdapter implements LoadAccountPort {
+class AccountPersistenceAdapter implements LoadAccountPort {
 
     private final AccountRepository accountRepository;
     private final ActivityRepository activityRepository;

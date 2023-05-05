@@ -2,5 +2,5 @@ package dev.practice.pay.account.adapter.out.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AccountRepository extends JpaRepository<AccountJpaEntity, Long> {
+interface AccountRepository extends JpaRepository<AccountJpaEntity, Long> {
 }
