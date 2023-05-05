@@ -7,6 +7,9 @@ import lombok.Value;
 
 import java.util.Optional;
 
+/**
+ * Aggregate Root
+ */
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account {
@@ -52,6 +55,7 @@ public class Account {
         );
     }
 
+    //TODO : 꼭 class 안에 있어야 하는가?
     @Value
     public static class AccountId {
         Long value;

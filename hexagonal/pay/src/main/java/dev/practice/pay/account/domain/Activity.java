@@ -27,8 +27,7 @@ public class Activity {
 
     @NonNull
     Money money;
-
-    @Builder
+    
     public Activity(
             @NonNull Account.AccountId ownerAccountId,
             @NonNull Account.AccountId sourceAccountId,
