@@ -22,6 +22,8 @@ public class AccountPersistenceAdapter implements LoadAccountPort {
     private final AccountRepository accountRepository;
     private final ActivityRepository activityRepository;
 
+    private final AccountMapper accountMapper;
+
     /**
      * TODO : Query 수 줄여보기...
      */
@@ -37,25 +39,7 @@ public class AccountPersistenceAdapter implements LoadAccountPort {
         Long depositBalance = orZero(activityRepository.getDepositBalanceUntil(account.getId(), baselineDate));
         Long withdrawalBalance = orZero(activityRepository.getWithdrawalBalanceUntil(account.getId(), baselineDate));
 
-        //Mapping
-        List<Activity> activityList = (List<Activity>) activities.stream()
-                .map(activityJpaEntity -> new Activity(
-                        new Activity.ActivityId(activityJpaEntity.getId()),
-                        new Account.AccountId(activityJpaEntity.getOwnerAccountId()),
-                        new Account.AccountId(activityJpaEntity.getSourceAccountId()),
-                        new Account.AccountId(activityJpaEntity.getTargetAccountId()),
-                        activityJpaEntity.getCreatedAt(),
-                        Money.of(activityJpaEntity.getAmount())
-                ));
-        ActivityWindow activityWindow = new ActivityWindow(activityList);
-
-        Money baselineBalance = Money.add(Money.of(depositBalance), Money.of(withdrawalBalance).negate());
-
-        return Account.withId(
-                new Account.AccountId(account.getId()),
-                baselineBalance,
-                activityWindow
-        );
+        return accountMapper.mapToDomainEntity(account, activities, depositBalance, withdrawalBalance);
     }
 
     private Long orZero(Long value){
