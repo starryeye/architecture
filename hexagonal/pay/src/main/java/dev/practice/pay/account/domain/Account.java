@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -44,15 +45,59 @@ public class Account {
         return new Account(accountId, baselineBalance, activityWindow);
     }
 
-    public Optional<AccountId> getId() {
+    public Optional<AccountId> getAccountId() {
         return Optional.ofNullable(this.accountId);
     }
 
+    /**
+     * 계좌 총액 계산
+     */
     public Money calculateBalance() {
         return Money.add(
                 this.baselineBalance,
                 this.activityWindow.calculateBalance(this.accountId)
         );
+    }
+
+    /**
+     * 인출
+     * - 잔액 검사 포함
+     * TODO: 실패 처리 예외로 .. 검토
+     */
+    public boolean withdraw(Money money, AccountId targetAccountId) {
+
+        if(!mayWithdraw(money)) {
+            return false;
+        }
+
+        Activity withdrawal = new Activity(
+                this.accountId,
+                this.accountId,
+                targetAccountId,
+                LocalDateTime.now(),
+                money
+        );
+        this.activityWindow.addActivity(withdrawal);
+        return true;
+    }
+
+    private boolean mayWithdraw(Money money) {
+        return Money.add(calculateBalance(), money.negate()).isGreaterThanOrEqualToZero();
+    }
+
+    /**
+     * 예금
+     */
+    public boolean deposit(Money money, AccountId sourceAccountId) {
+        Activity deposit = new Activity(
+                this.accountId,
+                sourceAccountId,
+                this.accountId,
+                LocalDateTime.now(),
+                money
+        );
+        activityWindow.addActivity(deposit);
+        return true;
     }
 
     //TODO : 꼭 class 안에 있어야 하는가?
