@@ -3,6 +3,7 @@ package dev.practice.pay.account.application.service;
 import dev.practice.pay.account.application.port.in.SendMoneyCommand;
 import dev.practice.pay.account.application.port.in.SendMoneyUseCase;
 import dev.practice.pay.account.application.port.out.LoadAccountPort;
+import dev.practice.pay.account.application.port.out.UpdateAccountStatePort;
 import dev.practice.pay.account.domain.Account;
 import dev.practice.pay.common.UseCase;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,11 @@ import java.time.LocalDateTime;
 class SendMoneyService implements SendMoneyUseCase {
 
     private final LoadAccountPort loadAccountPort;
+    private final UpdateAccountStatePort updateAccountStatePort;
 
     /**
-     * TODO: 낙관적 락
+     * TODO: 낙관적 락, index 를 ownerAccountId 로 잡자
+     * TODO: 요구사항, maximum 이체 한도는 10,000,000 원이다.
      */
     @Override
     public boolean sendMoney(SendMoneyCommand command) {
@@ -43,7 +46,8 @@ class SendMoneyService implements SendMoneyUseCase {
             return false;
         }
 
-        //TODO: update 로직
+        updateAccountStatePort.updateActivities(sourceAccount);
+        updateAccountStatePort.updateActivities(targetAccount);
 
         return true;
     }
