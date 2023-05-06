@@ -2,16 +2,14 @@ package dev.practice.pay.account.adapter.out.persistence;
 
 import dev.practice.pay.account.application.port.out.LoadAccountPort;
 import dev.practice.pay.account.domain.Account;
+import dev.practice.pay.common.PersistenceAdapter;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-/**
- * 양방향 매핑 전략
- */
+@PersistenceAdapter
 @RequiredArgsConstructor
 class AccountPersistenceAdapter implements LoadAccountPort {
 
