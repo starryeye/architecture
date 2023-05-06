@@ -2,6 +2,7 @@ package dev.practice.pay.account.domain;
 
 import lombok.NonNull;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ActivityWindow {
@@ -28,5 +29,9 @@ public class ActivityWindow {
 
     public void addActivity(Activity activity) {
         activityList.add(activity);
+    }
+
+    public List<Activity> getActivityList() {
+        return Collections.unmodifiableList(activityList);
     }
 }

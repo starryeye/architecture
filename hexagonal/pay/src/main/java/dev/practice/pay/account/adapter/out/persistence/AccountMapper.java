@@ -41,4 +41,14 @@ class AccountMapper {
                 ));
         return new ActivityWindow(activityList);
     }
+
+    ActivityJpaEntity mapToActivityJpaEntity(Activity activity) {
+        return ActivityJpaEntity.builder()
+                .ownerAccountId(activity.getOwnerAccountId().getValue())
+                .sourceAccountId(activity.getSourceAccountId().getValue())
+                .targetAccountId(activity.getTargetAccountId().getValue())
+                .createdAt(activity.getCreatedAt())
+                .amount(activity.getMoney().getAmount().longValue())
+                .build();
+    }
 }

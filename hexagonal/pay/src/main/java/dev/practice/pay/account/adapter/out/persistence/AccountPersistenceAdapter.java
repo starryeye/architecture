@@ -1,7 +1,10 @@
 package dev.practice.pay.account.adapter.out.persistence;
 
 import dev.practice.pay.account.application.port.out.LoadAccountPort;
+import dev.practice.pay.account.application.port.out.UpdateAccountStatePort;
 import dev.practice.pay.account.domain.Account;
+import dev.practice.pay.account.domain.Activity;
+import dev.practice.pay.account.domain.ActivityWindow;
 import dev.practice.pay.common.PersistenceAdapter;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +14,7 @@ import java.util.List;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-class AccountPersistenceAdapter implements LoadAccountPort {
+class AccountPersistenceAdapter implements LoadAccountPort, UpdateAccountStatePort {
 
     private final AccountRepository accountRepository;
     private final ActivityRepository activityRepository;
@@ -38,5 +41,16 @@ class AccountPersistenceAdapter implements LoadAccountPort {
 
     private Long orZero(Long value){
         return value == null ? 0L : value;
+    }
+
+    @Override
+    public void updateActivities(Account account) {
+
+        List<Activity> activityList = account.getActivityWindow().getActivityList();
+        for (Activity activity : activityList) {
+            if(activity.getActivityId() == null) {
+                activityRepository.save(accountMapper.mapToActivityJpaEntity(activity));
+            }
+        }
     }
 }
