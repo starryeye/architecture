@@ -2,10 +2,8 @@ package dev.practice.pay.account.domain;
 
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class ActivityWindow {
 
@@ -31,6 +29,20 @@ public class ActivityWindow {
                 .reduce(Money.ZERO, Money::add);
 
         return Money.add(depositBalance, withdrawalBalance.negate());
+    }
+
+    public LocalDateTime getStartTime() {
+        return activityList.stream()
+                .min(Comparator.comparing(Activity::getCreatedAt))
+                .orElseThrow(IllegalStateException::new)
+                .getCreatedAt();
+    }
+
+    public LocalDateTime getEndTime() {
+        return activityList.stream()
+                .max(Comparator.comparing(Activity::getCreatedAt))
+                .orElseThrow(IllegalStateException::new)
+                .getCreatedAt();
     }
 
     public void addActivity(Activity activity) {
