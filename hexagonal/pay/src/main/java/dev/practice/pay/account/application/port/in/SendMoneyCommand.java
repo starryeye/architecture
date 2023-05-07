@@ -2,11 +2,14 @@ package dev.practice.pay.account.application.port.in;
 
 import dev.practice.pay.account.domain.Account;
 import dev.practice.pay.account.domain.Money;
+import dev.practice.pay.common.SelfValidating;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
 
 @Value
-public class SendMoneyCommand {
+@EqualsAndHashCode(callSuper = false)
+public class SendMoneyCommand extends SelfValidating<SendMoneyCommand> {
 
     @NonNull
     Account.AccountId sourceAccountId;
@@ -25,5 +28,7 @@ public class SendMoneyCommand {
         this.sourceAccountId = sourceAccountId;
         this.targetAccountId = targetAccountId;
         this.money = money;
+
+        this.validateSelf();
     }
 }
