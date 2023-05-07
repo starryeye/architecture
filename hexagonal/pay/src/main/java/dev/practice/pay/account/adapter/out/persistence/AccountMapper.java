@@ -7,6 +7,7 @@ import dev.practice.pay.account.domain.Money;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 class AccountMapper {
@@ -30,7 +31,7 @@ class AccountMapper {
 
     ActivityWindow mapToActivityWindow(List<ActivityJpaEntity> activities) {
 
-        List<Activity> activityList = (List<Activity>) activities.stream()
+        List<Activity> activityList = activities.stream()
                 .map(activityJpaEntity -> new Activity(
                         new Activity.ActivityId(activityJpaEntity.getId()),
                         new Account.AccountId(activityJpaEntity.getOwnerAccountId()),
@@ -38,7 +39,7 @@ class AccountMapper {
                         new Account.AccountId(activityJpaEntity.getTargetAccountId()),
                         activityJpaEntity.getCreatedAt(),
                         Money.of(activityJpaEntity.getAmount())
-                ));
+                )).collect(Collectors.toList());
         return new ActivityWindow(activityList);
     }
 
