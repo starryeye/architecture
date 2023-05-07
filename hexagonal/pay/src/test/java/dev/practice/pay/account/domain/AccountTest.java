@@ -114,4 +114,40 @@ class AccountTest {
         Assertions.assertThat(account.getActivityWindow().getActivityList()).hasSize(3);
         Assertions.assertThat(account.calculateBalance()).isEqualTo(Money.of(1200L));
     }
+
+    @Test
+    void depositSuccess() {
+        //given
+        Account.AccountId accountId = new Account.AccountId(1L);
+        Account.AccountId sourceAccountId = new Account.AccountId(101L);
+
+        Activity activity1 = ActivityTestData.defaultActivity()
+                .withTargetAccount(accountId)
+                .withMoney(Money.of(999L))
+                .build();
+        Activity activity2 = ActivityTestData.defaultActivity()
+                .withTargetAccount(accountId)
+                .withMoney(Money.of(1L))
+                .build();
+        Activity activity3 = ActivityTestData.defaultActivity()
+                .withSourceAccount(accountId)
+                .withMoney(Money.of(300L))
+                .build();
+
+        ActivityWindow activityWindow = new ActivityWindow(activity1, activity2, activity3);
+
+        Account account = AccountTestData.defaultAccount()
+                .withAccountId(accountId)
+                .withBaselineBalance(Money.of(500L))
+                .withActivityWindow(activityWindow)
+                .build();
+
+        //when
+        boolean result = account.deposit(Money.of(800L), sourceAccountId);
+
+        //then
+        Assertions.assertThat(result).isTrue();
+        Assertions.assertThat(account.getActivityWindow().getActivityList()).hasSize(4);
+        Assertions.assertThat(account.calculateBalance()).isEqualTo(Money.of(2000L));
+    }
 }
