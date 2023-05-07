@@ -13,20 +13,20 @@ public class ActivityTestData {
                 .withOwnerAccount(new Account.AccountId(42L))
                 .withSourceAccount(new Account.AccountId(42L))
                 .withTargetAccount(new Account.AccountId(41L))
-                .withTimestamp(LocalDateTime.now())
+                .withCreatedAt(LocalDateTime.now())
                 .withMoney(Money.of(999L));
     }
 
     public static class ActivityBuilder {
-        private Activity.ActivityId id;
+        private Activity.ActivityId activityId;
         private Account.AccountId ownerAccountId;
         private Account.AccountId sourceAccountId;
         private Account.AccountId targetAccountId;
-        private LocalDateTime timestamp;
+        private LocalDateTime createdAt;
         private Money money;
 
-        public ActivityBuilder withId(Activity.ActivityId id) {
-            this.id = id;
+        public ActivityBuilder withActivityId(Activity.ActivityId activityId) {
+            this.activityId = activityId;
             return this;
         }
 
@@ -45,8 +45,8 @@ public class ActivityTestData {
             return this;
         }
 
-        public ActivityBuilder withTimestamp(LocalDateTime timestamp) {
-            this.timestamp = timestamp;
+        public ActivityBuilder withCreatedAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
             return this;
         }
 
@@ -57,11 +57,11 @@ public class ActivityTestData {
 
         public Activity build() {
             return new Activity(
-                    this.id,
+                    this.activityId,
                     this.ownerAccountId,
                     this.sourceAccountId,
                     this.targetAccountId,
-                    this.timestamp,
+                    this.createdAt,
                     this.money);
         }
     }
