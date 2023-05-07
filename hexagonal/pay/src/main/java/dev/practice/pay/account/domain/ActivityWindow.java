@@ -2,6 +2,8 @@ package dev.practice.pay.account.domain;
 
 import lombok.NonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,6 +13,10 @@ public class ActivityWindow {
 
     public ActivityWindow(@NonNull List<Activity> activityList) {
         this.activityList = activityList;
+    }
+
+    public ActivityWindow(@NonNull Activity... activities) {
+        this.activityList = new ArrayList<>(Arrays.asList(activities));
     }
 
     public Money calculateBalance(Account.AccountId accountId) {
