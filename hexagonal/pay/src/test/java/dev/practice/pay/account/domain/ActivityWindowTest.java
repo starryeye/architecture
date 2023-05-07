@@ -59,4 +59,37 @@ public class ActivityWindowTest {
         //then
         Assertions.assertThat(getEndTime).isEqualTo(endTime);
     }
+
+    @Test
+    void calculateBalance() {
+        //given
+        Account.AccountId accountId1 = new Account.AccountId(1L);
+        Account.AccountId accountId2 = new Account.AccountId(101L);
+
+        Activity activity1 = ActivityTestData.defaultActivity()
+                .withSourceAccount(accountId1)
+                .withTargetAccount(accountId2)
+                .withMoney(Money.of(999L))
+                .build();
+        Activity activity2 = ActivityTestData.defaultActivity()
+                .withSourceAccount(accountId1)
+                .withTargetAccount(accountId2)
+                .withMoney(Money.of(1L))
+                .build();
+        Activity activity3 = ActivityTestData.defaultActivity()
+                .withSourceAccount(accountId2)
+                .withTargetAccount(accountId1)
+                .withMoney(Money.of(200L))
+                .build();
+
+        ActivityWindow window = new ActivityWindow(activity1, activity2, activity3);
+
+        //when
+        Money balanceOfAccountId1 = window.calculateBalance(accountId1);
+        Money balanceOfAccountId2 = window.calculateBalance(accountId2);
+
+        //then
+        Assertions.assertThat(balanceOfAccountId1).isEqualTo(Money.of(800L).negate());
+        Assertions.assertThat(balanceOfAccountId2).isEqualTo(Money.of(800L));
+    }
 }
