@@ -19,12 +19,16 @@ class SendMoneyService implements SendMoneyUseCase {
     private final LoadAccountPort loadAccountPort;
     private final UpdateAccountStatePort updateAccountStatePort;
 
+    private final MoneyTransferProperties moneyTransferProperties;
+
     /**
      * TODO: 낙관적 락, index 를 ownerAccountId 로 잡자
      * TODO: 요구사항, maximum 이체 한도는 10,000,000 원이다.
      */
     @Override
     public boolean sendMoney(SendMoneyCommand command) {
+
+        checkThreshold(command);
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -50,5 +54,11 @@ class SendMoneyService implements SendMoneyUseCase {
         updateAccountStatePort.updateActivities(targetAccount);
 
         return true;
+    }
+
+    private void checkThreshold(SendMoneyCommand command) {
+        if(command.getMoney().isGreaterThan(moneyTransferProperties.getMaximumTransferThreshold())){
+            throw new ThresholdExceededException(moneyTransferProperties.getMaximumTransferThreshold(), command.getMoney());
+        }
     }
 }

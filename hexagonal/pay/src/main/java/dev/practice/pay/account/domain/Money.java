@@ -28,4 +28,8 @@ public class Money {
     public boolean isGreaterThanOrEqualToZero() {
         return amount.compareTo(BigInteger.ZERO) >= 0;
     }
+
+    public boolean isGreaterThan(Money money){
+        return this.amount.compareTo(money.amount) == 1;
+    }
 }
