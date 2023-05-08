@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/accounts}")
+@RequestMapping("/accounts")
 class GetAccountBalanceController {
 
     private final GetAccountBalanceQuery getAccountBalanceQuery;
