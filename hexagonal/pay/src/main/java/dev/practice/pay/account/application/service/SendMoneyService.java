@@ -23,7 +23,6 @@ class SendMoneyService implements SendMoneyUseCase {
 
     /**
      * TODO: 낙관적 락, index 를 ownerAccountId 로 잡자
-     * TODO: 요구사항, maximum 이체 한도는 10,000,000 원이다.
      */
     @Override
     public boolean sendMoney(SendMoneyCommand command) {

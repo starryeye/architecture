@@ -24,7 +24,7 @@ interface ActivityRepository extends JpaRepository<ActivityJpaEntity, Long> {
            select sum(a.amount)
            from ActivityJpaEntity a
            where a.ownerAccountId = :accountId 
-           and a.sourceAccountId = :accountId 
+           and a.targetAccountId = :accountId 
            and a.createdAt < :createdAt
            """)
     Long getDepositBalanceUntil(
@@ -36,7 +36,7 @@ interface ActivityRepository extends JpaRepository<ActivityJpaEntity, Long> {
            select sum(a.amount)
            from ActivityJpaEntity a
            where a.ownerAccountId = :accountId 
-           and a.targetAccountId = :accountId 
+           and a.sourceAccountId = :accountId 
            and a.createdAt < :createdAt
            """)
     Long getWithdrawalBalanceUntil(
