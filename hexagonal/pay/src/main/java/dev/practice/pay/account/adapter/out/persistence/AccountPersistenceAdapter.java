@@ -44,7 +44,7 @@ class AccountPersistenceAdapter implements LoadAccountPort, UpdateAccountStatePo
     }
 
     @Override
-    public void updateActivities(Account account) {
+    public void saveActivities(Account account) {
 
         List<Activity> activityList = account.getActivityWindow().getActivityList();
         for (Activity activity : activityList) {

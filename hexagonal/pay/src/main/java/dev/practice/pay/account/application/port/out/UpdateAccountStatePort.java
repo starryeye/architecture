@@ -7,5 +7,5 @@ import dev.practice.pay.account.domain.Account;
  */
 public interface UpdateAccountStatePort {
 
-    void updateActivities(Account account);
+    void saveActivities(Account account);
 }
