@@ -2,10 +2,11 @@
 
 ## Hexagonal Architecture study
 - Hexagonal Architecture
-  - domain : account
-  - diagram : TODO
-  - domain, application, adapter layer 격리 Test
-  - package 의존 방향 Test
+  - Domain : account
+  - Diagram : TODO
+  - Test
+    - domain, application, adapter layer 격리 Test
+    - package 의존 방향 Test
 
 ## dependency
 - Java 17
