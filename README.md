@@ -3,6 +3,7 @@
 ## study
 - Hexagonal Architecture
   - 도메인 : account
+  - diagram : TODO
   - domain, application, adapter 기반 Test
   - package 의존성 Test
 - Clean Architecture
