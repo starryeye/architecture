@@ -5,12 +5,14 @@ import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.conditions.ArchConditions;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
+import lombok.Getter;
 
 import java.util.List;
 
 /**
  * Architecture 규칙을 테스트
  */
+@Getter
 abstract class ArchitectureElement {
 
     /**
@@ -22,7 +24,7 @@ abstract class ArchitectureElement {
         this.basePackage = basePackage;
     }
 
-    String fullQualifiedPackage(String relativePackage) {
+    String getFullQualifiedPackage(String relativePackage) {
         return basePackage + "." + relativePackage;
     }
 
