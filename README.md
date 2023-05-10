@@ -1,13 +1,11 @@
 # architecture
 
-## study
+## Hexagonal Architecture study
 - Hexagonal Architecture
-  - 도메인 : account
+  - domain : account
   - diagram : TODO
-  - domain, application, adapter 기반 Test
-  - package 의존성 Test
-- Clean Architecture
-  - TODO
+  - domain, application, adapter layer 격리 Test
+  - package 의존 방향 Test
 
 ## dependency
 - Java 17
@@ -18,3 +16,6 @@
 - Validation
 - Lombok
 - H2
+
+## Clean Architecture study
+- TODO  
