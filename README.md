@@ -2,7 +2,11 @@
 
 ## study
 - Hexagonal Architecture
+  - 도메인 : account
+  - domain, application, adapter 기반 Test
+  - package 의존성 Test
 - Clean Architecture
+  - TODO
 
 ## dependency
 - Java 17
