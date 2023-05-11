@@ -14,6 +14,6 @@ public class DependencyRuleTest {
                 .should()
                 .dependOnClassesThat()
                 .resideInAnyPackage("dev.practice.pay.account.application..")
-                .check(new ClassFileImporter().importPackages("dev.practice.pay.account.."));
+                .check(new ClassFileImporter().importPackages("dev.practice.pay.."));
     }
 }
