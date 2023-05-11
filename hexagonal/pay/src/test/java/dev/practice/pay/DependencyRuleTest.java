@@ -5,7 +5,7 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 import dev.practice.pay.archunit.HexagonalArchitecture;
 import org.junit.jupiter.api.Test;
 
-public class DependencyRuleTest {
+class DependencyRuleTest {
 
     @Test
     void testPackageDependencies() {
