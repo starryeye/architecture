@@ -5,7 +5,7 @@
   - Domain : account
   - Diagram : TODO
   - Test
-    - domain, application, adapter layer 격리 Test
+    - domain, application, adapter layer 격리 Unit Test
     - package 의존 방향 Test
 
 ## dependency
