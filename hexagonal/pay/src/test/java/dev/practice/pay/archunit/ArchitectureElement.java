@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Architecture 규칙을 테스트
  */
-@Getter
 abstract class ArchitectureElement {
 
     /**
@@ -20,12 +19,16 @@ abstract class ArchitectureElement {
      */
     private final String basePackage;
 
-    public ArchitectureElement(String basePackage) {
+    ArchitectureElement(String basePackage) {
         this.basePackage = basePackage;
     }
 
     String getFullQualifiedPackage(String relativePackage) {
         return basePackage + "." + relativePackage;
+    }
+
+    String getBasePackage() {
+        return basePackage;
     }
 
     /**

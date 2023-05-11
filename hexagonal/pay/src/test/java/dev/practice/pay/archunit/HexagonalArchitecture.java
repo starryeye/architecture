@@ -13,7 +13,7 @@ public class HexagonalArchitecture extends ArchitectureElement{
     private List<String> domainPackages = new ArrayList<>();
     private String configurationPackage;
 
-    public HexagonalArchitecture(String basePackage) {
+    private HexagonalArchitecture(String basePackage) {
         super(basePackage);
     }
 

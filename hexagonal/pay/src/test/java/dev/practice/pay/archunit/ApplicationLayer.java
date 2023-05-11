@@ -42,7 +42,7 @@ public class ApplicationLayer extends ArchitectureElement{
      * application 은 파라미터의 패키지에 의존성이 없어야 한다.
      * 위반하면 테스트 실패
      */
-    public void doesNotDependOn(String packageName, JavaClasses classes) {
+    void doesNotDependOn(String packageName, JavaClasses classes) {
         denyDependency(this.getBasePackage(), packageName, classes);
     }
 
@@ -50,12 +50,12 @@ public class ApplicationLayer extends ArchitectureElement{
      * application 의 incoming port 와 outgoing port 는 서로 의존성 없어야 한다.
      * 위반하면 테스트 실패
      */
-    public void incomingAndOutgoingPortsDoNotDependOnEachOther(JavaClasses classes) {
+    void incomingAndOutgoingPortsDoNotDependOnEachOther(JavaClasses classes) {
         denyAnyDependency(incomingPortsPackages, outgoingPortsPackages, classes);
         denyAnyDependency(outgoingPortsPackages, incomingPortsPackages, classes);
     }
 
-    public List<String> getAllPackages() {
+    private List<String> getAllPackages() {
         List<String> allPackages = new ArrayList<>();
         allPackages.addAll(incomingPortsPackages);
         allPackages.addAll(outgoingPortsPackages);
