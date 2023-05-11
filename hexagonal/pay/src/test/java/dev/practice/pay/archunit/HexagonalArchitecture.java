@@ -52,7 +52,20 @@ public class HexagonalArchitecture extends ArchitectureElement{
                 this.domainPackages, Collections.singletonList(applicationLayer.getBasePackage()), classes);
     }
 
+    /**
+     * 전체 의존성 테스트
+     */
     public void check(JavaClasses classes) {
-        //TODO
+
+        this.adapters.doesNotContainEmptyPackages();
+        this.adapters.dontDependOnEachOther(classes);
+        this.adapters.doesNotDependOn(this.configurationPackage, classes);
+
+        this.applicationLayer.doesNotContainEmptyPackages();
+        this.applicationLayer.doesNotDependOn(this.adapters.getBasePackage(), classes);
+        this.applicationLayer.doesNotDependOn(this.configurationPackage, classes);
+        this.applicationLayer.incomingAndOutgoingPortsDoNotDependOnEachOther(classes);
+
+        this.domainDoesNotDependOnOtherPackages(classes);
     }
 }
