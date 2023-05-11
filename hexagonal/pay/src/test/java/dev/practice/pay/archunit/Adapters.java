@@ -39,7 +39,7 @@ public class Adapters extends ArchitectureElement{
     }
 
     /**
-     * adapter 끼리는 서로 참조 불가능
+     * adapter 끼리는 서로 의존성이 없어야 한다.
      * 위반하면 테스트 실패
      */
     void dontDependOnEachOther(JavaClasses classes) {
