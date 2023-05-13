@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
@@ -23,7 +24,8 @@ class SendMoneySystemTest {
     LoadAccountPort loadAccountPort;
 
     @Test
-    @Sql("SendMoneySystemTest.sql")// @Transactional ?
+    @Sql("SendMoneySystemTest.sql")
+    @Rollback
     void sendMoney() {
 
         //given
