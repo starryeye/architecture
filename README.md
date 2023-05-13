@@ -2,7 +2,7 @@
 
 ## Hexagonal Architecture study
 - Hexagonal Architecture
-  - Domain : account
+  - Domain : pay(account)
     - Api : send money, check balance
     - Diagram : TODO
     - Test
