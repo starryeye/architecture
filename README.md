@@ -7,7 +7,9 @@
     - Diagram : TODO
     - Test
       - domain, application, adapter layer 격리 Unit Test
-      - package 의존 방향 Test
+      - System Test
+      - Architecture Test
+        - package 의존 방향 Test
   - Domain : order
     - TODO
   
