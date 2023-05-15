@@ -2,6 +2,7 @@
 
 ## Hexagonal Architecture study
 - Hexagonal Architecture
+  - My Article : https://starryeye.tistory.com/152
   - Domain : pay(account)
     - Api : send money, check balance
     - Diagram : TODO
