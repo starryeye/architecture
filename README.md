@@ -6,7 +6,7 @@
   - Domain : pay(account)
     - Api : send money, check balance
     - Package Dependency Diagram
-      - <img width="926" alt="image" src="https://github.com/starryeye/architecture/assets/33487061/d4a906a2-a804-4201-a586-c3f212a8622b">
+      - <img width="998" alt="image" src="https://github.com/starryeye/architecture/assets/33487061/7b8b5a6d-a5dd-435a-a0fb-3df95dacc469">
     - Test
       - domain, application, adapter layer 격리 Unit Test
       - System Test
