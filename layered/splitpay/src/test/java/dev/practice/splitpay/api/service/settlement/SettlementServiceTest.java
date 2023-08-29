@@ -11,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
@@ -203,7 +207,61 @@ class SettlementServiceTest extends IntegrationTestSupport {
 
         SettlementRequest result = settlementRequestRepository.findById(requestId).orElseThrow(NoSuchElementException::new);
         assertThat(result.getStatus()).isEqualTo(SettlementRequestStatus.COMPLETED);
+        assertThat(result.getCompletedCount()).isEqualTo(2);
 
+    }
+
+    @DisplayName("주어진 정산하기 요청 Id 와 요청 대상자(receiverId)로 완료 처리하고, 전체 완료이면 전체 완료처리한다. 동시성 문제 해결 확인")
+    @Test
+    void paySettlementCompleteAndTotalCompleteWithThread100() throws InterruptedException {
+
+        // given
+        LocalDateTime registeredAt = LocalDateTime.of(2023, 8, 9, 23, 53, 0);
+
+        int numberOfThreads = 100;
+        List<SettlementDetail> details = new ArrayList<>();
+        for (long i = 1L; i <= numberOfThreads; i++) {
+            details.add(createSettlementDetail(i, 1000, SettlementDetailStatus.PENDING));
+        }
+
+        SettlementRequest settlementRequest = createSettlementRequest(999L, SettlementRequestStatus.PENDING, registeredAt, details);
+
+        SettlementRequest savedRequest = settlementRequestRepository.save(settlementRequest);
+        Long requestId = savedRequest.getRequestId();
+
+        List<Long> detailIds = savedRequest.getSettlementDetails().stream()
+                .map(SettlementDetail::getDetailId)
+                .toList();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(32);
+        CountDownLatch latch = new CountDownLatch(numberOfThreads);
+
+        // when
+        for (long i = 1L; i <= numberOfThreads; i++) {
+            final Long detailReceiverId = i;
+            executorService.execute(() -> {
+                try {
+                    settlementService.paySettlementComplete(requestId, detailReceiverId);
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+
+        latch.await();
+        executorService.shutdown();
+
+        // then
+        List<SettlementDetail> allById = settlementDetailRepository.findAllById(detailIds);
+        assertThat(allById).hasSize(numberOfThreads);
+        boolean allCompleted = allById.stream()
+                .allMatch(detail -> detail.getStatus() == SettlementDetailStatus.COMPLETED);
+        assertThat(allCompleted).isTrue();
+
+        SettlementRequest result = settlementRequestRepository.findById(requestId).orElseThrow();
+        assertThat(result.getStatus()).isEqualTo(SettlementRequestStatus.COMPLETED);
+
+        assertThat(result.getCompletedCount()).isEqualTo(100);
     }
 
     @DisplayName("주어진 detailId 리스트의 상태를 REMIND 로 업데이트 한다.")

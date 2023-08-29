@@ -1,15 +1,16 @@
 package dev.practice.splitpay.api.service;
 
-import jakarta.persistence.OptimisticLockException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.hibernate.StaleObjectStateException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Component;
 
 @Slf4j
+@Order(value = Ordered.LOWEST_PRECEDENCE - 1) //@Transactional 보다 먼저 수행되어야 한다.
 @Aspect
 @Component
 public class OptimisticLockingRetryAspect {
@@ -28,7 +29,7 @@ public class OptimisticLockingRetryAspect {
             } catch (OptimisticLockingFailureException ole) {
                 lockingException = ole;
 
-                log.info("Optimistic lock attempt {} of {} failed.", retryCount + 1, maxRetry);
+                log.info("Retry attempt {} of {} by optimistic lock", retryCount + 1, maxRetry);
 
                 if(retryCount < maxRetry - 1) {
                     try {
