@@ -29,6 +29,8 @@ public class SettlementRequest extends BaseEntity {
 
     private int totalAmount;
 
+    private int completedCount;
+
     @Enumerated(value = EnumType.STRING)
     private SettlementRequestStatus status;
 
@@ -39,9 +41,10 @@ public class SettlementRequest extends BaseEntity {
     private List<SettlementDetail> settlementDetails = new ArrayList<>();
 
     @Builder
-    private SettlementRequest(Long requesterId, SettlementRequestStatus status, LocalDateTime registeredAt, List<SettlementDetail> settlementDetails) {
+    private SettlementRequest(Long requesterId, int completedCount, SettlementRequestStatus status, LocalDateTime registeredAt, List<SettlementDetail> settlementDetails) {
         this.requesterId = requesterId;
         this.totalAmount = calculateTotalAmount(settlementDetails);
+        this.completedCount = completedCount;
         this.status = status;
         this.registeredAt = registeredAt;
         if(settlementDetails != null) {
@@ -74,6 +77,7 @@ public class SettlementRequest extends BaseEntity {
         this.getSettlementDetails().forEach(detail -> {
             if (detail.getReceiverId().equals(requesterId)) {
                 detail.updateStatus(SettlementDetailStatus.COMPLETED);
+                completedCount++;
             }
         });
     }
@@ -89,6 +93,7 @@ public class SettlementRequest extends BaseEntity {
 
         SettlementRequest created = SettlementRequest.builder()
                 .requesterId(requesterId)
+                .completedCount(0)
                 .status(SettlementRequestStatus.PENDING)
                 .registeredAt(registeredAt)
                 .settlementDetails(settlementDetails)
@@ -110,6 +115,10 @@ public class SettlementRequest extends BaseEntity {
                 detail.updateStatus(status);
             }
         });
+    }
+
+    public void increaseCompletedCount() {
+        this.completedCount++;
     }
 
     public void checkCompleteStatus() {

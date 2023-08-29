@@ -34,6 +34,27 @@ class SettlementRequestTest extends IntegrationTestSupport {
         assertThat(settlementRequest.getStatus()).isEqualTo(SettlementRequestStatus.PENDING);
     }
 
+    @DisplayName("1/N 정산하기 요청을 생성하면, 정산을 완료한 사람의 수는 0 이다.")
+    @Test
+    void completedCount() {
+
+        // given
+        LocalDateTime registeredAt = LocalDateTime.of(2023, 8, 9, 23, 53, 0);
+
+        Long requesterId = 1L;
+
+        List<SettlementDetail> settlementDetails = List.of(
+                createSettlementDetail(2L, 1000, PENDING),
+                createSettlementDetail(3L, 2000, PENDING)
+        );
+
+        // when
+        SettlementRequest settlementRequest = SettlementRequest.create(requesterId, registeredAt, settlementDetails);
+
+        // then
+        assertThat(settlementRequest.getCompletedCount()).isEqualTo(0);
+    }
+
     @DisplayName("1/N 정산하기 요청을 생성하면, 요청 대상에 대한 상세 요청이 포함된다.")
     @Test
     void settlementRequestIncludeSettlementDetails() {
@@ -101,7 +122,7 @@ class SettlementRequestTest extends IntegrationTestSupport {
         assertThat(settlementRequest.getTotalAmount()).isEqualTo(3000);
     }
 
-    @DisplayName("1/N 정산하기 요청을 생성하면, 자기 자신의 정산 상태를 COMPLETED 로 바꾼다.")
+    @DisplayName("1/N 정산하기 요청을 생성햘때, 자기 자신이 정산 대상에 포함되어 있으면 자기 자신의 정산 상태를 COMPLETED 로 바꾼다.")
     @Test
     void createSelfCompleteDetail() {
 
@@ -133,6 +154,32 @@ class SettlementRequestTest extends IntegrationTestSupport {
                 .containsExactly(
                         tuple(requesterId, 3000, COMPLETED)
                 );
+    }
+
+    @DisplayName("1/N 정산하기 요청을 생성할때, 자기 자신이 정산 대상에 포함되어있으면 완료 카운드를 1 증가 시킨다.")
+    @Test
+    void createSelfCompleteDetail2() {
+
+        // given
+        LocalDateTime registeredAt = LocalDateTime.of(2023, 8, 9, 23, 53, 0);
+
+        Long requesterId = 1L;
+
+        List<SettlementDetail> settlementDetails = List.of(
+                createSettlementDetail(requesterId, 3000, PENDING),
+                createSettlementDetail(2L, 1000, PENDING),
+                createSettlementDetail(3L, 2000, PENDING)
+        );
+
+        // when
+        SettlementRequest settlementRequest = SettlementRequest.create(
+                requesterId,
+                registeredAt,
+                settlementDetails
+        );
+
+        // then
+        assertThat(settlementRequest.getCompletedCount()).isEqualTo(1);
     }
 
     @DisplayName("1/N 정산하기 요청을 생성하면, 요청 대상자의 receiverId 는 중복 될 수 없다.")
@@ -194,6 +241,28 @@ class SettlementRequestTest extends IntegrationTestSupport {
                         tuple(receiverId1, 1000, REMINDED),
                         tuple(receiverId2, 2000, REMINDED)
                 );
+    }
+
+    @DisplayName("1/N 정산하기 요청의 정산 완료자 수를 1 증가 시킨다.")
+    @Test
+    void increaseCompletedCount() {
+
+        // given
+        LocalDateTime registeredAt = LocalDateTime.of(2023, 8, 9, 23, 53, 0);
+
+        SettlementRequest settlementRequest = SettlementRequest.builder()
+                .requesterId(1L)
+                .registeredAt(registeredAt)
+                .completedCount(1)
+                .status(SettlementRequestStatus.PENDING)
+                .settlementDetails(List.of())
+                .build();
+
+        // when
+        settlementRequest.increaseCompletedCount();
+
+        // then
+        assertThat(settlementRequest.getCompletedCount()).isEqualTo(2);
     }
 
     @DisplayName("1/N 정산하기 요청의 상태는 하위(요청 받은 사람 모두, Detail) 상태가 모두 COMPLETED 가 되면 COMPLETED 가 된다.")
