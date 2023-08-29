@@ -32,7 +32,7 @@ public class OptimisticLockingRetryAspect {
 
                 if(retryCount < maxRetry - 1) {
                     try {
-                        Thread.sleep(delay);
+                        Thread.sleep(delay); // thread pool 보다 많은 동시 처리가 일어날 경우 thread 부족 현상
                     } catch (InterruptedException ie) {
                         Thread.currentThread().interrupt();
                         throw new RuntimeException("Retry was interrupted", ie);

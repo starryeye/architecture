@@ -33,7 +33,7 @@ public class SettlementService {
         SettlementRequest request = settlementRequestRepository.findEntityGraphByRequestId(requestId).orElseThrow();
 
         request.updateDetailsStatus(List.of(receiverId), SettlementDetailStatus.COMPLETED);
-        request.increaseCompletedCount(); //TODO: unit test, 응답 DTO, Optimistic Lock test
+        request.increaseCompletedCount(); //TODO: 응답 DTO, Optimistic Lock test
 
         request.checkCompleteStatus(); //TODO : 삭제 고려
 

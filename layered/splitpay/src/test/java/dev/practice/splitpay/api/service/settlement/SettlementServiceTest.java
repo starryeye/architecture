@@ -109,6 +109,37 @@ class SettlementServiceTest extends IntegrationTestSupport {
 
     }
 
+    @DisplayName("주어진 정산하기 요청 Id 와 요청 대상자(receiverId)로 완료 처리하고, 완료한 사람수를 증가 시킨다.")
+    @Test
+    @Transactional
+    void paySettlementCompleteAndIncreaseCompletedCount() {
+
+        // given
+        Long receiverId = 1L;
+
+        LocalDateTime registeredAt = LocalDateTime.of(2023, 8, 9, 23, 53, 0);
+
+        SettlementDetail settlementDetail1 = createSettlementDetail(3L, 1000, SettlementDetailStatus.PENDING);
+        SettlementDetail settlementDetail2 = createSettlementDetail(receiverId, 1000, SettlementDetailStatus.PENDING);
+        SettlementDetail settlementDetail3 = createSettlementDetail(5L, 1000, SettlementDetailStatus.PENDING);
+        SettlementDetail settlementDetail4 = createSettlementDetail(6L, 1000, SettlementDetailStatus.PENDING);
+
+        SettlementRequest settlementRequest1 = createSettlementRequest(1L, SettlementRequestStatus.PENDING, registeredAt, List.of(settlementDetail1, settlementDetail2));
+        SettlementRequest settlementRequest2 = createSettlementRequest(2L, SettlementRequestStatus.PENDING, registeredAt, List.of(settlementDetail3, settlementDetail4));
+
+        List<SettlementRequest> savedAll = settlementRequestRepository.saveAll(List.of(settlementRequest1, settlementRequest2));
+
+        Long requestId = savedAll.get(0).getRequestId();
+
+        // when
+        settlementService.paySettlementComplete(requestId, receiverId);
+
+        // then
+        SettlementRequest result = settlementRequestRepository.findById(requestId).orElseThrow(NoSuchElementException::new);
+        assertThat(result.getCompletedCount()).isEqualTo(1);
+
+    }
+
     @DisplayName("주어진 정산하기 요청 Id 와 요청 대상자(receiverId)로 완료 처리하고, 전체 완료이면 전체 완료처리한다.")
     @Test
     @Transactional
