@@ -1,0 +1,75 @@
+### 1/N 정산하기 요청 신규 생성 1
+POST localhost:8080/api/v1/settlements/new
+Content-Type: application/json
+X-USER-ID: 1
+
+{
+  "settlementPieceRequests": [
+    {
+      "receiverId": 1,
+      "amount": 1000
+    },
+    {
+      "receiverId": 2,
+      "amount": 2000
+    },
+    {
+      "receiverId": 3,
+      "amount": 3000
+    }
+  ]
+}
+
+### 1/N 정산하기 요청에 대한 송금
+POST localhost:8080/api/v1/settlements/1/pay
+X-USER-ID: 2
+
+### 1/N 정산하기 요청에 대한 리마인드 알림
+POST localhost:8080/api/v1/settlements/1/remind
+X-USER-ID: 1
+
+
+### 1/N 정산하기 요청 신규 생성 2
+POST localhost:8080/api/v1/settlements/new
+Content-Type: application/json
+X-USER-ID: 2
+
+{
+  "settlementPieceRequests": [
+    {
+      "receiverId": 1,
+      "amount": 10000
+    },
+    {
+      "receiverId": 2,
+      "amount": 20000
+    },
+    {
+      "receiverId": 3,
+      "amount": 30000
+    }
+  ]
+}
+
+
+### 1/N 정산하기 요청 신규 생성 3
+POST localhost:8080/api/v1/settlements/new
+Content-Type: application/json
+X-USER-ID: 1
+
+{
+  "settlementPieceRequests": [
+    {
+      "receiverId": 4,
+      "amount": 100000
+    },
+    {
+      "receiverId": 5,
+      "amount": 200000
+    },
+    {
+      "receiverId": 6,
+      "amount": 300000
+    }
+  ]
+}

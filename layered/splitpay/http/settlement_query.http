@@ -1,0 +1,11 @@
+### 1/N 정산하기 보낸 요청 리스트 보기
+GET localhost:8080/api/v1/settlements/requests
+X-USER-ID: 1
+
+### 1/N 정산하기 받은 요청 리스트 보기
+GET localhost:8080/api/v1/settlements/receives
+X-USER-ID: 2
+
+### 1/N 정산하기 요청 세부정보 보기
+GET localhost:8080/api/v1/settlements/requests/1
+X-USER-ID: 1

@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  splitpay-mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: splitpay-db
+      MYSQL_USER: user1
+      MYSQL_PASSWORD: user1
+    ports:
+      - "3306:3306"
+    volumes:
+      - splitpay-mysql-data:/var/lib/mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
+volumes:
+  splitpay-mysql-data:
+
