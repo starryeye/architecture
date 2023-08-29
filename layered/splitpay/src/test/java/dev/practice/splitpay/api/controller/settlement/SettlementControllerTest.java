@@ -114,6 +114,38 @@ class SettlementControllerTest extends ControllerTestSupport {
                 .andExpect(jsonPath("$.data").isEmpty());
     }
 
+    @DisplayName("1/N 정산하기 요청을 등록할 때, 요청 대상은 2명 이상이어야 한다.")
+    @Test
+    void createSettlementWithPieceRequestSizeOne() throws Exception {
+
+        // given
+        String headerName = "X-USER-ID";
+        Long userId = 1L;
+
+        SettlementPieceRequest pieceRequest1 = SettlementPieceRequest.builder()
+                .receiverId(2L)
+                .amount(1000)
+                .build();
+
+        SettlementCreateRequest request = SettlementCreateRequest.builder()
+                .settlementPieceRequests(List.of(pieceRequest1))
+                .build();
+
+        // when
+        // then
+        mockMvc.perform(post("/api/v1/settlements/new")
+                        .header(headerName, userId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(400))
+                .andExpect(jsonPath("$.status").value("BAD_REQUEST"))
+                .andExpect(jsonPath("$.message").value("1/N 정산하기 요청 대상은 2명 이상이어야 합니다."))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
     @DisplayName("1/N 정산하기 요청을 등록할 때, 요청 대상의 Id 는 필수이다.")
     @Test
     void createSettlementWithoutReceiverId() throws Exception {
@@ -125,9 +157,13 @@ class SettlementControllerTest extends ControllerTestSupport {
         SettlementPieceRequest pieceRequest1 = SettlementPieceRequest.builder()
                 .amount(1000)
                 .build();
+        SettlementPieceRequest pieceRequest2 = SettlementPieceRequest.builder()
+                .amount(1000)
+                .receiverId(2L)
+                .build();
 
         SettlementCreateRequest request = SettlementCreateRequest.builder()
-                .settlementPieceRequests(List.of(pieceRequest1))
+                .settlementPieceRequests(List.of(pieceRequest1, pieceRequest2))
                 .build();
 
         // when
