@@ -10,7 +10,7 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Order(value = Ordered.LOWEST_PRECEDENCE - 1) //@Transactional 보다 먼저 수행되어야 한다.
+@Order(value = Ordered.LOWEST_PRECEDENCE - 1) //@Transactional 보다 먼저 수행되어야 한다. @Transactional 의 기본 Order 값은 Ordered.LOWEST_PRECEDENCE
 @Aspect
 @Component
 public class OptimisticLockingRetryAspect {
