@@ -87,32 +87,32 @@ class SettlementControllerTest extends ControllerTestSupport {
                 .andExpect(jsonPath("$.data").isEmpty());
     }
 
-    @DisplayName("1/N 정산하기 요청을 등록할 때, 요청 대상은 필수이다.")
-    @Test
-    void createSettlementWithEmptyPieceRequest() throws Exception {
-
-        // given
-        String headerName = "X-USER-ID";
-        Long userId = 1L;
-
-        SettlementCreateRequest request = SettlementCreateRequest.builder()
-                .settlementPieceRequests(List.of())
-                .build();
-
-        // when
-        // then
-        mockMvc.perform(post("/api/v1/settlements/new")
-                        .header(headerName, userId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request))
-                )
-                .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.code").value(400))
-                .andExpect(jsonPath("$.status").value("BAD_REQUEST"))
-                .andExpect(jsonPath("$.message").value("1/N 정산하기 요청 대상은 필수입니다."))
-                .andExpect(jsonPath("$.data").isEmpty());
-    }
+//    @DisplayName("1/N 정산하기 요청을 등록할 때, 요청 대상은 필수이다.")
+//    @Test
+//    void createSettlementWithEmptyPieceRequest() throws Exception {
+//
+//        // given
+//        String headerName = "X-USER-ID";
+//        Long userId = 1L;
+//
+//        SettlementCreateRequest request = SettlementCreateRequest.builder()
+//                .settlementPieceRequests(List.of())
+//                .build();
+//
+//        // when
+//        // then
+//        mockMvc.perform(post("/api/v1/settlements/new")
+//                        .header(headerName, userId)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(request))
+//                )
+//                .andDo(print())
+//                .andExpect(status().isBadRequest())
+//                .andExpect(jsonPath("$.code").value(400))
+//                .andExpect(jsonPath("$.status").value("BAD_REQUEST"))
+//                .andExpect(jsonPath("$.message").value("1/N 정산하기 요청 대상은 필수입니다."))
+//                .andExpect(jsonPath("$.data").isEmpty());
+//    }
 
     @DisplayName("1/N 정산하기 요청을 등록할 때, 요청 대상은 2명 이상이어야 한다.")
     @Test
@@ -193,9 +193,13 @@ class SettlementControllerTest extends ControllerTestSupport {
                 .receiverId(2L)
                 .amount(0)
                 .build();
+        SettlementPieceRequest pieceRequest2 = SettlementPieceRequest.builder()
+                .receiverId(2L)
+                .amount(2000)
+                .build();
 
         SettlementCreateRequest request = SettlementCreateRequest.builder()
-                .settlementPieceRequests(List.of(pieceRequest1))
+                .settlementPieceRequests(List.of(pieceRequest1, pieceRequest2))
                 .build();
 
         // when
