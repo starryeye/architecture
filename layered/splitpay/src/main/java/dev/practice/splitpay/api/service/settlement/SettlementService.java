@@ -33,17 +33,7 @@ public class SettlementService {
         SettlementRequest request = settlementRequestRepository.findEntityGraphByRequestId(requestId).orElseThrow();
 
         request.updateDetailsStatus(List.of(receiverId), SettlementDetailStatus.COMPLETED);
-        request.increaseCompletedCount(); //TODO: 응답 DTO, Optimistic Lock test
-
-        log.info(
-                "tx={}, requestId={}, receiverId={}, count={}, status={}, detailStatus={},",
-                Thread.currentThread().getName(),
-                requestId,
-                receiverId,
-                request.getCompletedCount(),
-                request.getStatus(),
-                request.getDetailByReceiverId(receiverId).getStatus()
-        );
+        request.increaseCompletedCount(); //TODO: 응답 DTO
 
         request.checkCompleteStatus(); //TODO : 삭제 고려
 
