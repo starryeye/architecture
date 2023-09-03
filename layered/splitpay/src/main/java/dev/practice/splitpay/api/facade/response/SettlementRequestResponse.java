@@ -18,14 +18,17 @@ public class SettlementRequestResponse {
 
     private SettlementRequestStatus status;
 
+    private int completedCount;
+
     private LocalDateTime registeredAt;
 
     @Builder
-    private SettlementRequestResponse(Long requestId, Long requesterId, int totalAmount, SettlementRequestStatus status, LocalDateTime registeredAt) {
+    private SettlementRequestResponse(Long requestId, Long requesterId, int totalAmount, SettlementRequestStatus status, int completedCount, LocalDateTime registeredAt) {
         this.requestId = requestId;
         this.requesterId = requesterId;
         this.totalAmount = totalAmount;
         this.status = status;
+        this.completedCount = completedCount;
         this.registeredAt = registeredAt;
     }
 
@@ -35,6 +38,7 @@ public class SettlementRequestResponse {
                 .requesterId(settlementRequest.getRequesterId())
                 .totalAmount(settlementRequest.getTotalAmount())
                 .status(settlementRequest.getStatus())
+                .completedCount(settlementRequest.getCompletedCount())
                 .registeredAt(settlementRequest.getRegisteredAt())
                 .build();
     }

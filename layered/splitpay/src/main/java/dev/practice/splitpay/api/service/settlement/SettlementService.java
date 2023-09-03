@@ -33,7 +33,7 @@ public class SettlementService {
         SettlementRequest request = settlementRequestRepository.findEntityGraphByRequestId(requestId).orElseThrow();
 
         request.updateDetailsStatus(List.of(receiverId), SettlementDetailStatus.COMPLETED);
-        request.increaseCompletedCount(); //TODO: 응답 DTO
+        request.increaseCompletedCount();
 
         request.checkCompleteStatus(); //TODO : 삭제 고려
 

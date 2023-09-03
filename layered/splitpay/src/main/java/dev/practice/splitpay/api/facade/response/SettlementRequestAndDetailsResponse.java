@@ -19,16 +19,19 @@ public class SettlementRequestAndDetailsResponse {
 
     private SettlementRequestStatus status;
 
+    private int completedCount;
+
     private LocalDateTime registeredAt;
 
     private List<SettlementDetailResponse> settlementDetails;
 
     @Builder
-    private SettlementRequestAndDetailsResponse(Long requestId, Long requesterId, int totalAmount, SettlementRequestStatus status, LocalDateTime registeredAt, List<SettlementDetailResponse> settlementDetails) {
+    private SettlementRequestAndDetailsResponse(Long requestId, Long requesterId, int totalAmount, SettlementRequestStatus status, int completedCount, LocalDateTime registeredAt, List<SettlementDetailResponse> settlementDetails) {
         this.requestId = requestId;
         this.requesterId = requesterId;
         this.totalAmount = totalAmount;
         this.status = status;
+        this.completedCount = completedCount;
         this.registeredAt = registeredAt;
         this.settlementDetails = settlementDetails;
     }
@@ -39,6 +42,7 @@ public class SettlementRequestAndDetailsResponse {
                 .requesterId(settlementRequest.getRequesterId())
                 .totalAmount(settlementRequest.getTotalAmount())
                 .status(settlementRequest.getStatus())
+                .completedCount(settlementRequest.getCompletedCount())
                 .registeredAt(settlementRequest.getRegisteredAt())
                 .settlementDetails(
                         settlementRequest.getSettlementDetails().stream()
