@@ -5,7 +5,6 @@ import dev.practice.splitpay.api.controller.settlement.request.SettlementCreateR
 import dev.practice.splitpay.api.facade.CreateSettlementUseCase;
 import dev.practice.splitpay.api.facade.PaySettlementUseCase;
 import dev.practice.splitpay.api.facade.RemindSettlementUseCase;
-import dev.practice.splitpay.api.service.settlement.SettlementService;
 import dev.practice.splitpay.api.facade.response.SettlementDetailResponse;
 import dev.practice.splitpay.api.facade.response.SettlementRequestAndDetailsResponse;
 import jakarta.validation.Valid;
