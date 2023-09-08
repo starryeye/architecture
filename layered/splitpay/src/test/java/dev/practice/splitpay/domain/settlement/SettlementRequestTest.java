@@ -52,7 +52,7 @@ class SettlementRequestTest extends IntegrationTestSupport {
         SettlementRequest settlementRequest = SettlementRequest.create(requesterId, registeredAt, settlementDetails);
 
         // then
-        assertThat(settlementRequest.getCompletedCount()).isEqualTo(0);
+        assertThat(settlementRequest.getCompletedCount()).isZero();
     }
 
     @DisplayName("1/N 정산하기 요청을 생성하면, 요청 대상에 대한 상세 요청이 포함된다.")
