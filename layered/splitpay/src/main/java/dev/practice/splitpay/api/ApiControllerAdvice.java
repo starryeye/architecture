@@ -14,7 +14,7 @@ public class ApiControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BindException.class)
-    public ApiResponse<?> bindException(BindException e) {
+    public <T> ApiResponse<T> bindException(BindException e) {
         return ApiResponse.of(
                 null,
                 e.getBindingResult().getAllErrors().get(0).getDefaultMessage(),
@@ -24,7 +24,7 @@ public class ApiControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MissingRequestHeaderException.class)
-    public ApiResponse<?> headerException(MissingRequestHeaderException e) {
+    public <T> ApiResponse<T> headerException(MissingRequestHeaderException e) {
         return ApiResponse.of(
                 null,
                 e.getMessage(),
@@ -34,7 +34,7 @@ public class ApiControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public ApiResponse<?> headerException(IllegalArgumentException e) {
+    public <T> ApiResponse<T> headerException(IllegalArgumentException e) {
         return ApiResponse.of(
                 null,
                 e.getMessage(),
@@ -44,7 +44,7 @@ public class ApiControllerAdvice {
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NoSuchElementException.class)
-    public ApiResponse<?> noSuchElementException(NoSuchElementException e) {
+    public <T> ApiResponse<T> noSuchElementException(NoSuchElementException e) {
         return ApiResponse.of(
                 null,
                 e.getMessage(),
@@ -54,7 +54,7 @@ public class ApiControllerAdvice {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
-    public ApiResponse<?> noSuchElementException(RuntimeException e) {
+    public <T> ApiResponse<T> noSuchElementException(RuntimeException e) {
         return ApiResponse.of(
                 null,
                 e.getMessage(),
