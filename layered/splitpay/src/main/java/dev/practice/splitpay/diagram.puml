@@ -1,0 +1,257 @@
+@startuml
+class dev.practice.splitpay.api.facade.response.SettlementRequestResponse {
+- Long requestId
+- Long requesterId
+- int totalAmount
+- SettlementRequestStatus status
+- int completedCount
+- LocalDateTime registeredAt
++ {static} SettlementRequestResponse of(SettlementRequest)
+}
+class dev.practice.splitpay.api.facade.CreateSettlementUseCase {
+- SettlementService settlementService
+- NotificationService notificationService
++ SettlementRequestAndDetailsResponse createSettlement(SettlementCreateServiceRequest,LocalDateTime)
+}
+class dev.practice.splitpay.api.controller.settlement.request.SettlementCreateRequest {
+- List<SettlementPieceRequest> settlementPieceRequests
++ SettlementCreateServiceRequest toServiceRequest(Long)
+}
+interface dev.practice.splitpay.domain.settlement.SettlementRequestRepository {
+~ Optional<SettlementRequest> findEntityGraphByRequestId(Long)
+~ List<SettlementRequest> findAllByRequesterIdOrderByCreatedAtDesc(Long)
+}
+class dev.practice.splitpay.api.facade.PaySettlementUseCase {
+- SettlementService settlementService
+- SettlementQueryService settlementQueryService
+- PaymentService paymentService
++ SettlementDetailResponse paySettlement(Long,Long)
+}
+class dev.practice.splitpay.api.service.OptimisticLockingRetryAspect {
++ Object retryOnOptimisticLock(ProceedingJoinPoint,RetryOnOptimisticLocking)
+}
+class dev.practice.splitpay.api.service.payment.PaymentService {
+- MoneySendClient moneySendClient
+- KakaopayMoneySendHistoryRepository kakaopayMoneySendHistoryRepository
++ void sendMoney(PaymentDto)
+}
+class dev.practice.splitpay.client.kakaopay.KakaopayMoneySendClient {
+- {static} String SUCCESS_MESSAGE
++ boolean sendMoney(Long,Long,int,Long)
+}
+class dev.practice.splitpay.SplitpayApplication {
++ {static} void main(String[])
+}
+class dev.practice.splitpay.api.service.message.NotificationService {
+- NotificationSendClient notificationSendClient
+- KakaotalkTalkSendHistoryRepository kakaotalkTalkSendHistoryRepository
++ boolean sendNotification(NotificationDto)
++ void sendNotificationBulk(List<NotificationDto>)
+}
+interface dev.practice.splitpay.domain.history.kakaopay.KakaopayMoneySendHistoryRepository {
+}
+class dev.practice.splitpay.domain.history.kakaopay.KakaopayMoneySendHistory {
+- Long id
+- Long fromId
+- Long toId
+- int amount
+- Long requestId
+- KakaopayMoneySendResult sendResult
+}
+interface dev.practice.splitpay.domain.settlement.SettlementDetailRepository {
+~ List<SettlementDetail> findAllByReceiverIdOrderByCreatedAtDesc(Long)
+}
+interface dev.practice.splitpay.domain.history.kakaotalk.KakaotalkTalkSendHistoryRepository {
+}
+class dev.practice.splitpay.api.controller.settlement.request.SettlementPieceRequest {
+- Long receiverId
+- int amount
++ SettlementPieceServiceRequest toServiceRequest()
+}
+enum dev.practice.splitpay.domain.history.kakaopay.KakaopayMoneySendResult {
++  SUCCESS
++  FAIL
+- String text
+}
+class dev.practice.splitpay.api.controller.settlement.SettlementQueryController {
+- GetSettlementDetailsUseCase getSettlementDetailsUseCase
+- GetSettlementRequestsUseCase getSettlementRequestsUseCase
+- GetSettlementRequestAndDetailsUseCase getSettlementRequestAndDetailsUseCase
++ ApiResponse<List<SettlementRequestResponse>> getSettlementRequests(Long)
++ ApiResponse<SettlementRequestAndDetailsResponse> getSettlementRequestAndDetails(Long,Long)
++ ApiResponse<List<SettlementDetailResponse>> getSettlementReceives(Long)
+}
+class dev.practice.splitpay.api.ApiControllerAdvice {
++ ApiResponse<T> bindException(BindException)
++ ApiResponse<T> headerException(MissingRequestHeaderException)
++ ApiResponse<T> headerException(IllegalArgumentException)
++ ApiResponse<T> noSuchElementException(NoSuchElementException)
++ ApiResponse<T> noSuchElementException(RuntimeException)
+}
+abstract class dev.practice.splitpay.domain.BaseEntity {
+- LocalDateTime createdAt
+- LocalDateTime lastModifiedAt
+}
+class dev.practice.splitpay.api.service.settlement.request.SettlementPieceServiceRequest {
+- Long receiverId
+- int amount
++ SettlementDetail toEntity()
+}
+class dev.practice.splitpay.domain.settlement.SettlementRequest {
+- Long requestId
+- Integer version
+- Long requesterId
+- int totalAmount
+- int completedCount
+- SettlementRequestStatus status
+- LocalDateTime registeredAt
+- List<SettlementDetail> settlementDetails
+- int calculateTotalAmount(List<SettlementDetail>)
+- void addSettlementDetail(SettlementDetail)
+- void selfCompleteDetail()
+- boolean hasDuplicationReceiverId()
++ {static} SettlementRequest create(Long,LocalDateTime,List<SettlementDetail>)
++ void updateDetailsStatus(List<Long>,SettlementDetailStatus)
++ void increaseCompletedCount()
++ void checkCompleteStatus()
++ void updateStatus(SettlementRequestStatus)
++ List<SettlementDetail> getFilteredWithoutCompletedDetails()
++ SettlementDetail getDetailByReceiverId(Long)
+}
+class dev.practice.splitpay.api.ApiResponse {
+- T data
+- String message
+- HttpStatus status
+- int code
++ {static} ApiResponse<T> of(T,String,HttpStatus)
++ {static} ApiResponse<T> of(T,HttpStatus)
++ {static} ApiResponse<T> ok(T)
+}
+class dev.practice.splitpay.api.service.settlement.SettlementQueryService {
+- SettlementRequestRepository settlementRequestRepository
+- SettlementDetailRepository settlementDetailRepository
++ List<SettlementRequest> getSettlementRequests(Long)
++ SettlementRequest getSettlementRequestAndDetails(Long)
++ List<SettlementDetail> getSettlementDetails(Long)
+}
+class dev.practice.splitpay.api.facade.response.SettlementDetailResponse {
+- Long receiverId
+- int amount
+- SettlementDetailStatus status
+- Long requestId
++ {static} SettlementDetailResponse of(SettlementDetail)
+}
+enum dev.practice.splitpay.domain.settlement.SettlementDetailStatus {
++  PENDING
++  REMINDED
++  COMPLETED
+- String text
+}
+class dev.practice.splitpay.client.kakaotalk.KakaotalkTalkSendClient {
+- {static} String SUCCESS_MESSAGE
++ boolean sendNotification(Long,Long,Long,int,String)
+}
+class dev.practice.splitpay.api.facade.GetSettlementRequestAndDetailsUseCase {
+- SettlementQueryService settlementQueryService
++ SettlementRequestAndDetailsResponse getSettlementRequestAndDetails(Long,Long)
+}
+class dev.practice.splitpay.api.facade.GetSettlementRequestsUseCase {
+- SettlementQueryService settlementQueryService
++ List<SettlementRequestResponse> getSettlementRequests(Long)
+}
+enum dev.practice.splitpay.domain.settlement.SettlementRequestStatus {
++  PENDING
++  COMPLETED
+- String text
+}
+class dev.practice.splitpay.api.facade.FacadeFactory {
++ {static} List<NotificationDto> toNotificationDto(SettlementRequest,List<SettlementDetail>)
++ {static} PaymentDto toPaymentDto(SettlementRequest,SettlementDetail)
+}
+class dev.practice.splitpay.api.service.settlement.SettlementServiceFactory {
++ {static} SettlementRequest createRequest(SettlementCreateServiceRequest,LocalDateTime)
+}
+class dev.practice.splitpay.api.facade.GetSettlementDetailsUseCase {
+- SettlementQueryService settlementQueryService
++ List<SettlementDetailResponse> getSettlementDetails(Long)
+}
+class dev.practice.splitpay.api.controller.settlement.SettlementController {
+- CreateSettlementUseCase createSettlementUseCase
+- PaySettlementUseCase paySettlementUseCase
+- RemindSettlementUseCase remindSettlementUseCase
++ ApiResponse<SettlementRequestAndDetailsResponse> createSettlement(Long,SettlementCreateRequest)
++ ApiResponse<SettlementDetailResponse> paySettlement(Long,Long)
++ ApiResponse<List<SettlementDetailResponse>> remindSettlement(Long,Long)
+}
+class dev.practice.splitpay.api.service.settlement.request.SettlementCreateServiceRequest {
+- Long requesterId
+- List<SettlementPieceServiceRequest> settlementPieceServiceRequests
+}
+class dev.practice.splitpay.api.facade.RemindSettlementUseCase {
+- SettlementService settlementService
+- SettlementQueryService settlementQueryService
+- NotificationService notificationService
++ List<SettlementDetailResponse> remindSettlement(Long,Long)
+}
+class dev.practice.splitpay.api.service.settlement.SettlementService {
+- SettlementRequestRepository settlementRequestRepository
+- SettlementDetailRepository settlementDetailRepository
++ SettlementRequest createSettlement(SettlementCreateServiceRequest,LocalDateTime)
++ SettlementDetail paySettlementComplete(Long,Long)
++ List<SettlementDetail> remindSettlement(List<Long>)
+}
+class dev.practice.splitpay.api.facade.response.SettlementRequestAndDetailsResponse {
+- Long requestId
+- Long requesterId
+- int totalAmount
+- SettlementRequestStatus status
+- int completedCount
+- LocalDateTime registeredAt
+- List<SettlementDetailResponse> settlementDetails
++ {static} SettlementRequestAndDetailsResponse of(SettlementRequest)
+}
+class dev.practice.splitpay.domain.settlement.SettlementDetail {
+- Long detailId
+- Long receiverId
+- int amount
+- SettlementDetailStatus status
+- SettlementRequest settlementRequest
+# void setSettlementRequest(SettlementRequest)
++ {static} SettlementDetail create(Long,int)
++ void updateStatus(SettlementDetailStatus)
+}
+enum dev.practice.splitpay.domain.history.kakaotalk.KakaotalkTalkSendResult {
++  SUCCESS
++  FAIL
+- String text
+}
+class dev.practice.splitpay.domain.history.kakaotalk.KakaotalkTalkSendHistory {
+- Long id
+- Long fromId
+- Long toId
+- Long requestId
+- int amount
+- String content
+- KakaotalkTalkSendResult sendResult
+}
+class dev.practice.splitpay.config.JpaAuditingConfig {
+}
+interface dev.practice.splitpay.api.service.payment.MoneySendClient {
+~ boolean sendMoney(Long,Long,int,Long)
+}
+interface dev.practice.splitpay.api.service.message.NotificationSendClient {
+~ boolean sendNotification(Long,Long,Long,int,String)
+}
+
+
+org.springframework.data.jpa.repository.JpaRepository <|-- dev.practice.splitpay.domain.settlement.SettlementRequestRepository
+dev.practice.splitpay.api.service.payment.MoneySendClient <|.. dev.practice.splitpay.client.kakaopay.KakaopayMoneySendClient
+org.springframework.data.jpa.repository.JpaRepository <|-- dev.practice.splitpay.domain.history.kakaopay.KakaopayMoneySendHistoryRepository
+dev.practice.splitpay.domain.BaseEntity <|-- dev.practice.splitpay.domain.history.kakaopay.KakaopayMoneySendHistory
+org.springframework.data.jpa.repository.JpaRepository <|-- dev.practice.splitpay.domain.settlement.SettlementDetailRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- dev.practice.splitpay.domain.history.kakaotalk.KakaotalkTalkSendHistoryRepository
+dev.practice.splitpay.domain.BaseEntity <|-- dev.practice.splitpay.domain.settlement.SettlementRequest
+dev.practice.splitpay.api.service.message.NotificationSendClient <|.. dev.practice.splitpay.client.kakaotalk.KakaotalkTalkSendClient
+dev.practice.splitpay.domain.BaseEntity <|-- dev.practice.splitpay.domain.settlement.SettlementDetail
+dev.practice.splitpay.domain.BaseEntity <|-- dev.practice.splitpay.domain.history.kakaotalk.KakaotalkTalkSendHistory
+@enduml
