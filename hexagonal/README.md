@@ -30,5 +30,3 @@
 - Archunit 1.0.1
 - Spring Boot Test
 
-## Clean Architecture study
-- TODO  
