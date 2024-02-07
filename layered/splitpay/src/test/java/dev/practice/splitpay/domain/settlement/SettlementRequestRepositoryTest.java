@@ -1,6 +1,8 @@
 package dev.practice.splitpay.domain.settlement;
 
 import dev.practice.splitpay.IntegrationTestSupport;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceUnitUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,16 @@ class SettlementRequestRepositoryTest extends IntegrationTestSupport {
     @Autowired
     private SettlementRequestRepository repository;
 
+    @Autowired
+    private EntityManager entityManager;
+
     @DisplayName("Entity Graph, 주어진 requestId 로 한방 쿼리")
     @Test
     void findEntityGraphByRequestId() {
 
         // given
+        PersistenceUnitUtil persistenceUnitUtil = entityManager.getEntityManagerFactory().getPersistenceUnitUtil();
+
         LocalDateTime registeredAt = LocalDateTime.of(2023, 8, 9, 23, 53, 0);
 
         Long requesterId = 1L;
@@ -38,16 +45,17 @@ class SettlementRequestRepositoryTest extends IntegrationTestSupport {
 
         Long requestId = saved.getRequestId();
 
-
-        System.out.println("==============111==============");
-
+        
         // when
+        System.out.println("==============before when==============");
         SettlementRequest result = repository.findEntityGraphByRequestId(requestId).orElseThrow();
-
-
-        System.out.println("===============222==============");
+        System.out.println("===============after when==============");
 
         // then
+        result.getSettlementDetails().forEach(
+                detail -> assertThat(persistenceUnitUtil.isLoaded(detail)).isTrue()
+        );
+
         assertThat(result.getSettlementDetails()).hasSize(4)
                 .extracting("receiverId", "amount")
                 .containsExactlyInAnyOrder(
