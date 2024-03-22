@@ -18,7 +18,11 @@
       - test
         - <img width="520" alt="image" src="https://github.com/starryeye/architecture/assets/33487061/f23a0ca6-54e5-4f7d-ad8f-cf3573152072">
   
-  
+## 다른 리포지토리
+- [hellopay](https://github.com/starryeye/hellopay)
+
+
+
 ## dependency
 - Java 17
 - Spring Boot 3.0.5
