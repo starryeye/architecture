@@ -1,0 +1,11 @@
+###
+GET http://localhost:8080/api/ranking?tag=POPULAR
+
+###
+GET http://localhost:8080/api/ranking?tag=RISING
+
+###
+GET http://localhost:8080/api/ranking?tag=FALLING
+
+###
+GET http://localhost:8080/api/ranking?tag=VOLUME

@@ -1,0 +1,20 @@
+PUT http://localhost:8080/api/stocks/update
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "price": 1000,
+    "previousClosePrice": 10,
+    "volume": 99999,
+    "views": 99999
+  },
+  {
+    "id": 2,
+    "price": 10,
+    "previousClosePrice": 1000,
+    "volume": 1,
+    "views": 1
+  }
+]
+

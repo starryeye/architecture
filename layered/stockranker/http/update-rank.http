@@ -1,0 +1,39 @@
+###
+POST http://localhost:8080/api/ranking/update
+Content-Type: application/json
+
+{
+  "tag": "ALL"
+}
+
+###
+POST http://localhost:8080/api/ranking/update
+Content-Type: application/json
+
+{
+"tag": "POPULAR"
+}
+
+###
+POST http://localhost:8080/api/ranking/update
+Content-Type: application/json
+
+{
+  "tag": "RISING"
+}
+
+###
+POST http://localhost:8080/api/ranking/update
+Content-Type: application/json
+
+{
+  "tag": "FALLING"
+}
+
+###
+POST http://localhost:8080/api/ranking/update
+Content-Type: application/json
+
+{
+  "tag": "VOLUME"
+}

@@ -1,0 +1,965 @@
+POST http://localhost:8080/api/stocks/new
+Content-Type: application/json
+
+[
+  {
+    "code": "005930",
+    "name": "삼성전자",
+    "price": 61500,
+    "previousClosePrice": 61600,
+    "volume": 1000,
+    "views": 500
+  },
+  {
+    "code": "373220",
+    "name": "LG에너지솔루션",
+    "price": 452000,
+    "previousClosePrice": 452200,
+    "volume": 2000,
+    "views": 600
+  },
+  {
+    "code": "000660",
+    "name": "SK하이닉스",
+    "price": 95700,
+    "previousClosePrice": 95800,
+    "volume": 1500,
+    "views": 700
+  },
+  {
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 875000,
+    "previousClosePrice": 875100,
+    "volume": 2500,
+    "views": 800
+  },
+  {
+    "code": "005935",
+    "name": "삼성전자우",
+    "price": 56400,
+    "previousClosePrice": 56300,
+    "volume": 1200,
+    "views": 900
+  },
+  {
+    "code": "051910",
+    "name": "LG화학",
+    "price": 651000,
+    "previousClosePrice": 651100,
+    "volume": 1300,
+    "views": 1000
+  },
+  {
+    "code": "006400",
+    "name": "삼성SDI",
+    "price": 624000,
+    "previousClosePrice": 624200,
+    "volume": 1100,
+    "views": 1100
+  },
+  {
+    "code": "035420",
+    "name": "NAVER",
+    "price": 250000,
+    "previousClosePrice": 250300,
+    "volume": 900,
+    "views": 1200
+  },
+  {
+    "code": "005380",
+    "name": "현대차",
+    "price": 186000,
+    "previousClosePrice": 186200,
+    "volume": 1400,
+    "views": 1300
+  },
+  {
+    "code": "035720",
+    "name": "카카오",
+    "price": 79200,
+    "previousClosePrice": 79300,
+    "volume": 1600,
+    "views": 1400
+  },
+  {
+    "code": "000270",
+    "name": "기아",
+    "price": 76700,
+    "previousClosePrice": 76800,
+    "volume": 1700,
+    "views": 1500
+  },
+  {
+    "code": "068270",
+    "name": "셀트리온",
+    "price": 202500,
+    "previousClosePrice": 202600,
+    "volume": 1800,
+    "views": 1600
+  },
+  {
+    "code": "028260",
+    "name": "삼성물산",
+    "price": 120500,
+    "previousClosePrice": 120600,
+    "volume": 1900,
+    "views": 1700
+  },
+  {
+    "code": "005490",
+    "name": "POSCO홀딩스",
+    "price": 256000,
+    "previousClosePrice": 256200,
+    "volume": 2000,
+    "views": 1800
+  },
+  {
+    "code": "105560",
+    "name": "KB금융",
+    "price": 50700,
+    "previousClosePrice": 50800,
+    "volume": 2100,
+    "views": 1900
+  },
+  {
+    "code": "012330",
+    "name": "현대모비스",
+    "price": 211000,
+    "previousClosePrice": 211200,
+    "volume": 2200,
+    "views": 2000
+  },
+  {
+    "code": "096770",
+    "name": "SK이노베이션",
+    "price": 210500,
+    "previousClosePrice": 210600,
+    "volume": 2300,
+    "views": 2100
+  },
+  {
+    "code": "055550",
+    "name": "신한지주",
+    "price": 35500,
+    "previousClosePrice": 35600,
+    "volume": 2400,
+    "views": 2200
+  },
+  {
+    "code": "034730",
+    "name": "SK",
+    "price": 236000,
+    "previousClosePrice": 236100,
+    "volume": 2500,
+    "views": 2300
+  },
+  {
+    "code": "066570",
+    "name": "LG전자",
+    "price": 102000,
+    "previousClosePrice": 102200,
+    "volume": 2600,
+    "views": 2400
+  },
+  {
+    "code": "323410",
+    "name": "카카오뱅크",
+    "price": 31200,
+    "previousClosePrice": 31300,
+    "volume": 2700,
+    "views": 2500
+  },
+  {
+    "code": "015760",
+    "name": "한국전력",
+    "price": 21550,
+    "previousClosePrice": 21600,
+    "volume": 2800,
+    "views": 2600
+  },
+  {
+    "code": "034020",
+    "name": "두산에너빌리티",
+    "price": 21450,
+    "previousClosePrice": 21500,
+    "volume": 2900,
+    "views": 2700
+  },
+  {
+    "code": "003550",
+    "name": "LG",
+    "price": 84300,
+    "previousClosePrice": 84400,
+    "volume": 3000,
+    "views": 2800
+  },
+  {
+    "code": "259960",
+    "name": "크래프톤",
+    "price": 258000,
+    "previousClosePrice": 258100,
+    "volume": 3100,
+    "views": 2900
+  },
+  {
+    "code": "003670",
+    "name": "포스코케미칼",
+    "price": 161500,
+    "previousClosePrice": 161600,
+    "volume": 3200,
+    "views": 3000
+  },
+  {
+    "code": "032830",
+    "name": "삼성생명",
+    "price": 62000,
+    "previousClosePrice": 62100,
+    "volume": 3300,
+    "views": 3100
+  },
+  {
+    "code": "329180",
+    "name": "현대중공업",
+    "price": 134500,
+    "previousClosePrice": 134600,
+    "volume": 3400,
+    "views": 3200
+  },
+  {
+    "code": "011200",
+    "name": "HMM",
+    "price": 23550,
+    "previousClosePrice": 23600,
+    "volume": 3500,
+    "views": 3300
+  },
+  {
+    "code": "086790",
+    "name": "하나금융지주",
+    "price": 38500,
+    "previousClosePrice": 38600,
+    "volume": 3600,
+    "views": 3400
+  },
+  {
+    "code": "051900",
+    "name": "LG생활건강",
+    "price": 726000,
+    "previousClosePrice": 726100,
+    "volume": 3700,
+    "views": 3500
+  },
+  {
+    "code": "017670",
+    "name": "SK텔레콤",
+    "price": 51200,
+    "previousClosePrice": 51300,
+    "volume": 3800,
+    "views": 3600
+  },
+  {
+    "code": "033780",
+    "name": "KT&G",
+    "price": 81200,
+    "previousClosePrice": 81300,
+    "volume": 3900,
+    "views": 3700
+  },
+  {
+    "code": "010130",
+    "name": "고려아연",
+    "price": 589000,
+    "previousClosePrice": 589100,
+    "volume": 4000,
+    "views": 3800
+  },
+  {
+    "code": "010950",
+    "name": "S-Oil",
+    "price": 92300,
+    "previousClosePrice": 92400,
+    "volume": 4100,
+    "views": 3900
+  },
+  {
+    "code": "009150",
+    "name": "삼성전기",
+    "price": 138000,
+    "previousClosePrice": 138100,
+    "volume": 4200,
+    "views": 4000
+  },
+  {
+    "code": "018260",
+    "name": "삼성에스디에스",
+    "price": 133000,
+    "previousClosePrice": 133100,
+    "volume": 4300,
+    "views": 4100
+  },
+  {
+    "code": "030200",
+    "name": "KT",
+    "price": 38000,
+    "previousClosePrice": 38100,
+    "volume": 4400,
+    "views": 4200
+  },
+  {
+    "code": "003490",
+    "name": "대한항공",
+    "price": 26500,
+    "previousClosePrice": 26600,
+    "volume": 4500,
+    "views": 4300
+  },
+  {
+    "code": "000810",
+    "name": "삼성화재",
+    "price": 198500,
+    "previousClosePrice": 198600,
+    "volume": 4600,
+    "views": 4400
+  },
+  {
+    "code": "302440",
+    "name": "SK바이오사이언스",
+    "price": 122000,
+    "previousClosePrice": 122100,
+    "volume": 4700,
+    "views": 4500
+  },
+  {
+    "code": "377300",
+    "name": "카카오페이",
+    "price": 68400,
+    "previousClosePrice": 68500,
+    "volume": 4800,
+    "views": 4600
+  },
+  {
+    "code": "009830",
+    "name": "한화솔루션",
+    "price": 46600,
+    "previousClosePrice": 46700,
+    "volume": 4900,
+    "views": 4700
+  },
+  {
+    "code": "316140",
+    "name": "우리금융지주",
+    "price": 12200,
+    "previousClosePrice": 12300,
+    "volume": 5000,
+    "views": 4800
+  },
+  {
+    "code": "036570",
+    "name": "엔씨소프트",
+    "price": 382500,
+    "previousClosePrice": 382600,
+    "volume": 5100,
+    "views": 4900
+  },
+  {
+    "code": "011070",
+    "name": "LG이노텍",
+    "price": 347000,
+    "previousClosePrice": 347100,
+    "volume": 5200,
+    "views": 5000
+  },
+  {
+    "code": "352820",
+    "name": "하이브",
+    "price": 188000,
+    "previousClosePrice": 188100,
+    "volume": 5300,
+    "views": 5100
+  },
+  {
+    "code": "090430",
+    "name": "아모레퍼시픽",
+    "price": 128000,
+    "previousClosePrice": 128200,
+    "volume": 5400,
+    "views": 5200
+  },
+  {
+    "code": "024110",
+    "name": "기업은행",
+    "price": 9690,
+    "previousClosePrice": 9700,
+    "volume": 5500,
+    "views": 5300
+  },
+  {
+    "code": "361610",
+    "name": "SK아이이테크놀로지",
+    "price": 94700,
+    "previousClosePrice": 94800,
+    "volume": 5600,
+    "views": 5400
+  },
+  {
+    "code": "086280",
+    "name": "현대글로비스",
+    "price": 178500,
+    "previousClosePrice": 178600,
+    "volume": 5700,
+    "views": 5500
+  },
+  {
+    "code": "009540",
+    "name": "한국조선해양",
+    "price": 92100,
+    "previousClosePrice": 92200,
+    "volume": 5800,
+    "views": 5600
+  },
+  {
+    "code": "097950",
+    "name": "CJ제일제당",
+    "price": 419000,
+    "previousClosePrice": 419100,
+    "volume": 5900,
+    "views": 5700
+  },
+  {
+    "code": "011170",
+    "name": "롯데케미칼",
+    "price": 182000,
+    "previousClosePrice": 182200,
+    "volume": 6000,
+    "views": 5800
+  },
+  {
+    "code": "402340",
+    "name": "SK스퀘어",
+    "price": 43600,
+    "previousClosePrice": 43700,
+    "volume": 6100,
+    "views": 5900
+  },
+  {
+    "code": "326030",
+    "name": "SK바이오팜",
+    "price": 78000,
+    "previousClosePrice": 78100,
+    "volume": 6200,
+    "views": 6000
+  },
+  {
+    "code": "034220",
+    "name": "LG디스플레이",
+    "price": 16250,
+    "previousClosePrice": 16300,
+    "volume": 6300,
+    "views": 6100
+  },
+  {
+    "code": "251270",
+    "name": "넷마블",
+    "price": 67300,
+    "previousClosePrice": 67400,
+    "volume": 6400,
+    "views": 6200
+  },
+  {
+    "code": "383220",
+    "name": "F&F",
+    "price": 149000,
+    "previousClosePrice": 149200,
+    "volume": 6500,
+    "views": 6300
+  },
+  {
+    "code": "018880",
+    "name": "한온시스템",
+    "price": 10600,
+    "previousClosePrice": 10700,
+    "volume": 6600,
+    "views": 6400
+  },
+  {
+    "code": "035250",
+    "name": "강원랜드",
+    "price": 26400,
+    "previousClosePrice": 26500,
+    "volume": 6700,
+    "views": 6500
+  },
+  {
+    "code": "047810",
+    "name": "한국항공우주",
+    "price": 56100,
+    "previousClosePrice": 56200,
+    "volume": 6800,
+    "views": 6600
+  },
+  {
+    "code": "069500",
+    "name": "KODEX 200",
+    "price": 32915,
+    "previousClosePrice": 33000,
+    "volume": 6900,
+    "views": 6700
+  },
+  {
+    "code": "032640",
+    "name": "LG유플러스",
+    "price": 12350,
+    "previousClosePrice": 12400,
+    "volume": 7000,
+    "views": 6800
+  },
+  {
+    "code": "010140",
+    "name": "삼성중공업",
+    "price": 5990,
+    "previousClosePrice": 6000,
+    "volume": 7100,
+    "views": 6900
+  },
+  {
+    "code": "088980",
+    "name": "맥쿼리인프라",
+    "price": 12850,
+    "previousClosePrice": 12900,
+    "volume": 7200,
+    "views": 7000
+  },
+  {
+    "code": "000720",
+    "name": "현대건설",
+    "price": 46400,
+    "previousClosePrice": 46500,
+    "volume": 7300,
+    "views": 7100
+  },
+  {
+    "code": "011790",
+    "name": "SKC",
+    "price": 132500,
+    "previousClosePrice": 132600,
+    "volume": 7400,
+    "views": 7200
+  },
+  {
+    "code": "161390",
+    "name": "한국타이어앤테크놀로지",
+    "price": 38950,
+    "previousClosePrice": 39000,
+    "volume": 7500,
+    "views": 7300
+  },
+  {
+    "code": "021240",
+    "name": "코웨이",
+    "price": 65000,
+    "previousClosePrice": 65100,
+    "volume": 7600,
+    "views": 7400
+  },
+  {
+    "code": "267250",
+    "name": "HD현대",
+    "price": 59400,
+    "previousClosePrice": 59500,
+    "volume": 7700,
+    "views": 7500
+  },
+  {
+    "code": "000060",
+    "name": "메리츠화재",
+    "price": 38150,
+    "previousClosePrice": 38200,
+    "volume": 7800,
+    "views": 7600
+  },
+  {
+    "code": "004020",
+    "name": "현대제철",
+    "price": 33250,
+    "previousClosePrice": 33300,
+    "volume": 7900,
+    "views": 7700
+  },
+  {
+    "code": "005830",
+    "name": "DB손해보험",
+    "price": 62400,
+    "previousClosePrice": 62500,
+    "volume": 8000,
+    "views": 7800
+  },
+  {
+    "code": "028050",
+    "name": "삼성엔지니어링",
+    "price": 22400,
+    "previousClosePrice": 22500,
+    "volume": 8100,
+    "views": 7900
+  },
+  {
+    "code": "010620",
+    "name": "현대미포조선",
+    "price": 108000,
+    "previousClosePrice": 108100,
+    "volume": 8200,
+    "views": 8000
+  },
+  {
+    "code": "271560",
+    "name": "오리온",
+    "price": 109000,
+    "previousClosePrice": 109100,
+    "volume": 8300,
+    "views": 8100
+  },
+  {
+    "code": "000100",
+    "name": "유한양행",
+    "price": 56800,
+    "previousClosePrice": 56900,
+    "volume": 8400,
+    "views": 8200
+  },
+  {
+    "code": "006800",
+    "name": "미래에셋증권",
+    "price": 6730,
+    "previousClosePrice": 6800,
+    "volume": 8500,
+    "views": 8300
+  },
+  {
+    "code": "180640",
+    "name": "한진칼",
+    "price": 61800,
+    "previousClosePrice": 61900,
+    "volume": 8600,
+    "views": 8400
+  },
+  {
+    "code": "078930",
+    "name": "GS",
+    "price": 44200,
+    "previousClosePrice": 44300,
+    "volume": 8700,
+    "views": 8500
+  },
+  {
+    "code": "004990",
+    "name": "롯데지주",
+    "price": 38900,
+    "previousClosePrice": 39000,
+    "volume": 8800,
+    "views": 8600
+  },
+  {
+    "code": "011780",
+    "name": "금호석유",
+    "price": 131500,
+    "previousClosePrice": 131600,
+    "volume": 8900,
+    "views": 8700
+  },
+  {
+    "code": "138040",
+    "name": "메리츠금융지주",
+    "price": 30050,
+    "previousClosePrice": 30100,
+    "volume": 9000,
+    "views": 8800
+  },
+  {
+    "code": "137310",
+    "name": "에스디바이오센서",
+    "price": 37350,
+    "previousClosePrice": 37400,
+    "volume": 9100,
+    "views": 8900
+  },
+  {
+    "code": "036460",
+    "name": "한국가스공사",
+    "price": 41700,
+    "previousClosePrice": 41800,
+    "volume": 9200,
+    "views": 9000
+  },
+  {
+    "code": "128940",
+    "name": "한미약품",
+    "price": 311500,
+    "previousClosePrice": 311600,
+    "volume": 9300,
+    "views": 9100
+  },
+  {
+    "code": "371460",
+    "name": "TIGER 차이나전기차SOLACTIVE",
+    "price": 16600,
+    "previousClosePrice": 16700,
+    "volume": 9400,
+    "views": 9200
+  },
+  {
+    "code": "029780",
+    "name": "삼성카드",
+    "price": 31550,
+    "previousClosePrice": 31600,
+    "volume": 9500,
+    "views": 9300
+  },
+  {
+    "code": "012450",
+    "name": "한화에어로스페이스",
+    "price": 71400,
+    "previousClosePrice": 71500,
+    "volume": 9600,
+    "views": 9400
+  },
+  {
+    "code": "003410",
+    "name": "쌍용C&E",
+    "price": 7030,
+    "previousClosePrice": 7100,
+    "volume": 9700,
+    "views": 9500
+  },
+  {
+    "code": "071050",
+    "name": "한국금융지주",
+    "price": 61200,
+    "previousClosePrice": 61300,
+    "volume": 9800,
+    "views": 9600
+  },
+  {
+    "code": "020150",
+    "name": "일진머티리얼즈",
+    "price": 72500,
+    "previousClosePrice": 72600,
+    "volume": 9900,
+    "views": 9700
+  },
+  {
+    "code": "005940",
+    "name": "NH투자증권",
+    "price": 10050,
+    "previousClosePrice": 10100,
+    "volume": 10000,
+    "views": 9800
+  },
+  {
+    "code": "241560",
+    "name": "두산밥캣",
+    "price": 33200,
+    "previousClosePrice": 33300,
+    "volume": 10100,
+    "views": 9900
+  },
+  {
+    "code": "307950",
+    "name": "현대오토에버",
+    "price": 120500,
+    "previousClosePrice": 120600,
+    "volume": 10200,
+    "views": 10000
+  },
+  {
+    "code": "005387",
+    "name": "현대차2우B",
+    "price": 89800,
+    "previousClosePrice": 89900,
+    "volume": 10300,
+    "views": 10100
+  },
+  {
+    "code": "008560",
+    "name": "메리츠증권",
+    "price": 4930,
+    "previousClosePrice": 5000,
+    "volume": 10400,
+    "views": 10200
+  },
+  {
+    "code": "016360",
+    "name": "삼성증권",
+    "price": 35100,
+    "previousClosePrice": 35200,
+    "volume": 10500,
+    "views": 10300
+  },
+  {
+    "code": "047050",
+    "name": "포스코인터내셔널",
+    "price": 25150,
+    "previousClosePrice": 25200,
+    "volume": 10600,
+    "views": 10400
+  },
+  {
+    "code": "001450",
+    "name": "현대해상",
+    "price": 34100,
+    "previousClosePrice": 34200,
+    "volume": 10700,
+    "views": 10500
+  },
+  {
+    "code": "282330",
+    "name": "BGF리테일",
+    "price": 174500,
+    "previousClosePrice": 174600,
+    "volume": 10800,
+    "views": 10600
+  },
+  {
+    "code": "010060",
+    "name": "OCI",
+    "price": 124000,
+    "previousClosePrice": 124200,
+    "volume": 10900,
+    "views": 10700
+  },
+  {
+    "code": "028670",
+    "name": "팬오션",
+    "price": 5520,
+    "previousClosePrice": 5600,
+    "volume": 11000,
+    "views": 10800
+  },
+  {
+    "code": "002790",
+    "name": "아모레G",
+    "price": 35600,
+    "previousClosePrice": 35700,
+    "volume": 11100,
+    "views": 10900
+  },
+  {
+    "code": "139480",
+    "name": "이마트",
+    "price": 105000,
+    "previousClosePrice": 105100,
+    "volume": 11200,
+    "views": 11000
+  },
+  {
+    "code": "272210",
+    "name": "한화시스템",
+    "price": 15300,
+    "previousClosePrice": 15400,
+    "volume": 11300,
+    "views": 11100
+  },
+  {
+    "code": "000120",
+    "name": "CJ대한통운",
+    "price": 126500,
+    "previousClosePrice": 126600,
+    "volume": 11400,
+    "views": 11200
+  },
+  {
+    "code": "023530",
+    "name": "롯데쇼핑",
+    "price": 101500,
+    "previousClosePrice": 101600,
+    "volume": 11500,
+    "views": 11300
+  },
+  {
+    "code": "052690",
+    "name": "한전기술",
+    "price": 74900,
+    "previousClosePrice": 75000,
+    "volume": 11600,
+    "views": 11400
+  },
+  {
+    "code": "008930",
+    "name": "한미사이언스",
+    "price": 41600,
+    "previousClosePrice": 41700,
+    "volume": 11700,
+    "views": 11500
+  },
+  {
+    "code": "008770",
+    "name": "호텔신라",
+    "price": 72200,
+    "previousClosePrice": 72300,
+    "volume": 11800,
+    "views": 11600
+  },
+  {
+    "code": "064350",
+    "name": "현대로템",
+    "price": 25750,
+    "previousClosePrice": 25800,
+    "volume": 11900,
+    "views": 11700
+  },
+  {
+    "code": "112610",
+    "name": "씨에스윈드",
+    "price": 64900,
+    "previousClosePrice": 65000,
+    "volume": 12000,
+    "views": 11800
+  },
+  {
+    "code": "002380",
+    "name": "KCC",
+    "price": 306000,
+    "previousClosePrice": 306100,
+    "volume": 12100,
+    "views": 11900
+  },
+  {
+    "code": "006360",
+    "name": "GS건설",
+    "price": 31500,
+    "previousClosePrice": 31600,
+    "volume": 12200,
+    "views": 12000
+  },
+  {
+    "code": "007070",
+    "name": "GS리테일",
+    "price": 25600,
+    "previousClosePrice": 25700,
+    "volume": 12300,
+    "views": 12100
+  },
+  {
+    "code": "014680",
+    "name": "한솔케미칼",
+    "price": 230500,
+    "previousClosePrice": 230600,
+    "volume": 12400,
+    "views": 12200
+  },
+  {
+    "code": "030000",
+    "name": "제일기획",
+    "price": 22350,
+    "previousClosePrice": 22400,
+    "volume": 12500,
+    "views": 12300
+  },
+  {
+    "code": "026960",
+    "name": "동서",
+    "price": 25650,
+    "previousClosePrice": 25700,
+    "volume": 12600,
+    "views": 12400
+  }
+]
